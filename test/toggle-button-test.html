@@ -1,0 +1,227 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>Toggle Button</title>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+
+  <!-- Import the element to test -->
+  <link rel="import" href="../src/toggle-button.html">
+
+</head>
+<body>
+
+  <test-fixture id="vanilla">
+    <template>
+       <toggle-button></toggle-button>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="toggle">
+    <template>
+       <toggle-button notoggle></toggle-button>
+    </template>
+  </test-fixture>
+  
+<test-fixture id="custombutton">
+  <template>
+     <toggle-button icons='{
+							"done":"add", 
+							"do":"menu"}'></toggle-button>
+ </template>
+</test-fixture>
+<script>
+
+suite('toggle element, no attributes', function() {
+        var tbutton;
+
+        setup(function() {
+           	tbutton = fixture('vanilla');
+          });
+        
+        test('notoggle is false', function() {
+      	//debugger;
+          var value = tbutton.notoggle;
+          
+          assert.equal(value, false);
+        });
+        test('default icons in use', function() {
+        	//debugger;
+            var value = tbutton.icons;
+            
+  		assert.equal(value.done, "expand-less");
+  		assert.equal(value.do, "expand-more");	
+          });
+
+        test('start with done state', function() {
+          	//debugger;
+              var value = tbutton.ModeColclass;
+              
+    		assert.equal(value, "done");
+    		  });
+
+        test('start with expand-less icon', function() {
+        	//debugger;
+            var value = tbutton.ModeIcon;
+            
+  		assert.equal(value, "expand-less");
+  		  });
+        
+		test('pressing button toggles', function() {
+	      	  //debugger;
+	      	  
+			pressbutton(tbutton);    		        	
+	      	        	  
+	        	               
+	      		assert.equal(tbutton.ModeColclass, "do");
+	      		assert.equal(tbutton.ModeIcon,"expand-more");
+	      		assert.equal(tbutton.ModeDone,false);
+	      		
+		});
+        	
+      });
+    suite('notoggle element, no attributes', function() {
+        var tbutton;
+
+        setup(function() {
+         	tbutton = fixture('toggle');
+        });
+  		
+        test('notoggle is true', function() {
+      	//debugger;
+          var value = tbutton.notoggle;
+          assert.equal(value, true);
+        });
+        test('default icons in use', function() {
+        	//debugger;
+            var value = tbutton.icons;
+            
+  		assert.equal(value.done, "expand-less");
+  		assert.equal(value.do, "expand-more");	
+          });
+        test('start with do state', function() {
+          	//debugger;
+              var value = tbutton.ModeColclass;
+              
+              assert.equal(value, "do");
+              assert.equal(tbutton.ModeDone,false);
+      		  });
+        test('start with expand-less icon', function() {
+        	//debugger;
+            var value = tbutton.ModeIcon;
+            
+  		assert.equal(value, "expand-more");
+  		  });
+        test('pressing button toggles not', function(){
+        	//debugger;
+			pressbutton(tbutton);    		        	
+			assert.equal(tbutton.ModeColclass, "do");
+	  		assert.equal(tbutton.ModeIcon,"expand-more");
+	  		assert.equal(tbutton.ModeDone,false);
+	  		});
+
+        
+    });
+    suite('custom icons', function() {
+        var tbutton;
+
+        setup(function() {
+         	tbutton = fixture('custombutton');
+        });
+  		
+        test('notoggle is false', function() {
+      	//debugger;
+          var value = tbutton.notoggle;
+          assert.equal(value, false);
+        });
+        test('custom icons on fab toggle', function() {
+        	//debugger;
+            var value = tbutton.icons;
+            
+  			assert.equal(value.done, "add");
+  			assert.equal(value.do, "menu");
+  			
+  			var pbutton=Polymer.dom(tbutton.root).querySelector('paper-fab');
+  			assert.equal(pbutton.icon,"add");
+  			pressbutton(tbutton);
+  			assert.equal(pbutton.icon,"menu");
+        });
+        test('start with done state', function() {
+          	//debugger;
+              var value = tbutton.ModeColclass;
+              
+              assert.equal(value, "done");
+              assert.equal(tbutton.ModeDone,true);
+      	});
+        test('pressing button toggles to custom icon', function() {
+	      	  //debugger;
+	      	  
+				pressbutton(tbutton);    		        	
+	      	        	  
+	        	               
+	      		assert.equal(tbutton.ModeColclass, "do");
+	      		assert.equal(tbutton.ModeIcon,"menu");
+	      		assert.equal(tbutton.ModeDone,false);
+	      		
+		});
+        test('pressing button toggles not, if notoggle is set', function() {
+	      	  //debugger;
+	      	    
+	      	    tbutton.notoggle=true;
+				pressbutton(tbutton);    		        	
+	      	        	  
+	        	               
+	      		assert.equal(tbutton.ModeColclass, "do");
+	      		assert.equal(tbutton.ModeIcon,"menu");
+	      		assert.equal(tbutton.ModeDone,false);
+	      		
+	      		pressbutton(tbutton);    		        	
+
+	      		assert.equal(tbutton.ModeColclass, "do");
+	      		assert.equal(tbutton.ModeIcon,"menu");
+	      		assert.equal(tbutton.ModeDone,false);
+	      	    
+		});
+        test('seting color with custom colors', function() {
+        
+        	tbutton.customStyle['--toggle-button-icon-done-color']='blue';
+        	tbutton.customStyle['--toggle-button-done-color']='red';
+        	//tbutton.customStyle['--toggle-button-margin']="10px";
+        	tbutton.updateStyles();
+        	
+			var pbutton=Polymer.dom(tbutton.root).querySelector('paper-fab');
+				  
+				  
+			assert.equal(tbutton.ModeColclass, "done");
+			assert.equal(getComputedStyle(pbutton, null)['color'],"rgb(255, 0, 0)");
+        	assert.equal(getComputedStyle(pbutton, null)['background-color'],"rgb(0, 0, 255)");
+        	
+        	pressbutton(tbutton);
+ 			assert.equal(tbutton.ModeColclass, "do");
+        	assert.equal(getComputedStyle(pbutton, null)['background-color'],"rgb(255, 0, 0)");
+        	assert.equal(getComputedStyle(pbutton, null)['color'],"rgb(0, 0, 255)");
+        	//assert.equal(getComputedStyle(pbutton, null)['margin'],"10px");
+        	 		
+ 		});          
+    });
+    
+    function pressbutton (tbutton){
+    	var pbutton=Polymer.dom(tbutton.root).querySelector('paper-fab');
+			pbutton.click();    	
+    }
+  </script>
+
+</body>
+</html>
