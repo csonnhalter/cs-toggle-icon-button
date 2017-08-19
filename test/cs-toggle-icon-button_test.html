@@ -206,13 +206,12 @@
     }
 
     function getCompStyle(element, property){
-        if (window.ShadyCSS) {
-          return ShadyCSS.getComputedStyleValue(element,property);
-        }else{
-          return getComputedStyle(element).getPropertyValue(property);
-        }          
+      if (window.ShadyCSS) {
+        return ShadyCSS.getComputedStyleValue(element,property);
+      }else{
+        return getComputedStyle(element).getPropertyValue(property);
+      }          
     }
-    </script>
-
+  </script>
   </body>
 </html>
