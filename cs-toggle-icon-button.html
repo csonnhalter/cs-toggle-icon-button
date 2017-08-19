@@ -1,36 +1,36 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 
-<link rel="import" href="./jh-icons.html">
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
-<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="./default-icons.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/neon-animation/web-animations.html">
+<link rel="import" href="/bower_components/paper-tooltip/paper-tooltip.html">
 
 
 
 <dom-module id="cs-toggle-icon-button">
 	<template>
 		<style>
-		:host{
-			--toggle-button-do-color:var(--primary-color, black);
-			--toggle-button-done-color:var(--primary-text-color, black);
-		}
+			:host{
+				--tt-background:var(--toggle-button-tip-background,var(--paper-tooltip-background));
+				--tt-opacity:var(--toggle-button-tip-opacity,var(--paper-tooltip-opacity));					
+			}
+		
+			paper-icon-button.do{
+				color:var(--toggle-button-do-color,black);
+			}
 
-		paper-icon-button.do{
-			color:var(--toggle-button-do-color);
-		}
+			paper-icon-button.done{
+				color:var(--toggle-button-done-color,black);
+			}
 
-		paper-icon-button.done{
-			color:var(--toggle-button-done-color);
- 		}
-
-		paper-tooltip{
-	       --paper-tooltip-background:#fff;
-	       --paper-tooltip-opacity:	0.9;
-	       --paper-tooltip-text-color:var(--primary-color,black);
-	       box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-	       border-radius: 2px;
-	  }
+			paper-tooltip{
+			--paper-tooltip-background: var(--tt-background, white);	
+			--paper-tooltip-opacity:	var(--tt-opacity, 0.9);
+		/* --paper-tooltip-text-color:var(--paper-tooltip-text-color, black); */
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+		border-radius: 2px;
+}
 		</style>
 
 		<paper-icon-button id="tog" class$="[[ModeColclass]]" icon="[[ModeIcon]]" noink on-tap="_toggle">

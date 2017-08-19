@@ -26,7 +26,7 @@
     </template>
   </test-fixture>
 
-  <test-fixture id="custombutton">
+  <test-fixture id="custombuttoncolors">
     <template>
       <cs-toggle-icon-button icons='{
 							"done":"add", 
@@ -34,6 +34,17 @@
       </<cs-toggle-icon-button>
     </template>
   </test-fixture>
+  <test-fixture id="toggletipcss">
+    <template>
+      <cs-toggle-icon-button 
+        icons='{
+          "done":"add", 
+          "do":"menu"}' 
+        style="--toggle-button-tip-background: rgb(255, 0, 0); --toggle-button-tip-text-color: rgb(0, 0, 255); --toggle-button-tip-opacity:0.5; ">
+        </<cs-toggle-icon-button>
+    </template>
+  </test-fixture>
+
   <script>
     suite('toggle element, no attributes',() => {
       let tbutton;
@@ -73,6 +84,18 @@
         assert.equal(tbutton.ModeIcon, "expand-less");
         assert.equal(tbutton.ModeDone, true);
       });
+
+        test('using internal defaults for tips css', () => {
+        //debugger;
+        let tipBgColor = 'white'; 
+        let tipOpacity = 0.9;
+
+        let tip = tbutton.shadowRoot.querySelector('paper-tooltip');
+
+        assert.equal(getCompStyle(tip, '--paper-tooltip-opacity'), tipOpacity);
+        assert.equal(getCompStyle(tip, '--paper-tooltip-background'), tipBgColor);
+      });
+
     });
 
     suite('notoggle element, no attributes', () => {
@@ -123,11 +146,11 @@
       });
     });
 
-    suite('custom icons', () =>{
+    suite('custom color icons', () =>{
       let tbutton;
 
       setup(() =>{
-        tbutton = fixture('custombutton');
+        tbutton = fixture('custombuttoncolors');
       });
 
       test('notoggle is false', () =>{
@@ -200,6 +223,27 @@
       });
     });
     
+  suite('own tip css', () => {
+    let tbutton;
+
+    setup(() => {
+      tbutton = fixture('toggletipcss');
+    });
+
+
+    test('setting custom tip background color and opacity', () => {
+      //debugger;
+      let tipBgColor = getCompStyle(tbutton, '--toggle-button-tip-background');
+      let tipOpacity = getCompStyle(tbutton, '--toggle-button-tip-opacity');
+
+      let tip = tbutton.shadowRoot.querySelector('paper-tooltip');
+      
+      assert.equal(getCompStyle(tip,'--paper-tooltip-opacity'), tipOpacity);
+      assert.equal(getCompStyle(tip, '--paper-tooltip-background'), tipBgColor);
+    });
+
+  });
+
     function pressbutton(tbutton) {
       let pbutton = tbutton.shadowRoot.querySelector('paper-icon-button');
       pbutton.click();
