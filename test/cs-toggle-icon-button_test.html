@@ -30,7 +30,8 @@
     <template>
       <cs-toggle-icon-button icons='{
 							"done":"add", 
-							"do":"menu"}'></<cs-toggle-icon-button>
+              "do":"menu"}' style="--toggle-button-do-color: rgb(255, 0, 0);--toggle-button-done-color: rgb(0, 0, 255); ">
+      </<cs-toggle-icon-button>
     </template>
   </test-fixture>
   <script>
@@ -182,36 +183,34 @@
         assert.equal(tbutton.ModeDone, false);
       });
       
-      test('seting color with custom colors', () =>{
-        debugger;
-
-        tbutton.updateStyles({'--toggle-button-icon-do-color':'blue'});
-        tbutton.updateStyles({'--toggle-button-done-color': 'red'});
-          
-      
+      test('setting color with custom colors', () =>{
+        let doColor = getCompStyle(tbutton, '--toggle-button-do-color');
+        let doneColor = getCompStyle(tbutton, '--toggle-button-done-color');
+        
         let pbutton = tbutton.shadowRoot.querySelector('paper-icon-button');
-      
-        assert.equal(tbutton.ModeColclass, "do");
-        let style;
-        if (window.ShadyCSS) {
-            style = ShadyCSS.getComputedStyleValue(pbutton, 'color');
-          } else {
-            style = getComputedStyle(pbutton).getPropertyValue('color');
-          }
-        // assert.equal(getComputedStyle(pbutton, null)['color'], "rgb(0, 0, 255)");
-        // assert.equal(getComputedStyle(pbutton, null)['background-color'], "rgb(255, 0, 0)");
 
-        // pressbutton(tbutton);
+        assert.equal(tbutton.ModeColclass, "do");
+        assert.equal(getCompStyle(pbutton, 'color'), doColor);
+          
+        
+        pressbutton(tbutton);
       
-        // assert.equal(tbutton.ModeColclass, "done");
-        // assert.equal(getComputedStyle(pbutton, null)['background-color'], "rgb(255, 0, 0)");
-        // assert.equal(getComputedStyle(pbutton, null)['color'], "rgb(0, 0, 255)");
+        assert.equal(tbutton.ModeColclass, "done");
+        assert.equal(getCompStyle(pbutton, 'color'), doneColor);  
       });
     });
     
     function pressbutton(tbutton) {
       let pbutton = tbutton.shadowRoot.querySelector('paper-icon-button');
       pbutton.click();
+    }
+
+    function getCompStyle(element, property){
+        if (window.ShadyCSS) {
+          return ShadyCSS.getComputedStyleValue(element,property);
+        }else{
+          return getComputedStyle(element).getPropertyValue(property);
+        }          
     }
     </script>
 
