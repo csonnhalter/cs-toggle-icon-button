@@ -11,6 +11,7 @@
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../cs-toggle-icon-button.html">
+    <link rel="import" href="./demo-icons.html">
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -23,6 +24,11 @@
       <demo-snippet>
         <template>
           <cs-toggle-icon-button></cs-toggle-icon-button>
+          <cs-toggle-icon-button notoggle 
+            style="--toggle-button-done-color:deepskyblue;"></cs-toggle-icon-button>
+          <cs-toggle-icon-button icons='{"done":"favorite","do":"favorite-border"}' style="--toggle-button-done-color:plum;--toggle-button-do-color:darkorchid;"></cs-toggle-icon-button> 
+          <cs-toggle-icon-button tip="This is a tooltip"></cs-toggle-icon-button> 
+
         </template>
       </demo-snippet>
     </div>
