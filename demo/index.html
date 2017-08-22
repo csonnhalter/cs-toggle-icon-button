@@ -25,9 +25,13 @@
         <template>
           <cs-toggle-icon-button></cs-toggle-icon-button>
           <cs-toggle-icon-button notoggle 
-            style="--toggle-button-done-color:deepskyblue;"></cs-toggle-icon-button>
-          <cs-toggle-icon-button icons='{"done":"favorite","do":"favorite-border"}' style="--toggle-button-done-color:plum;--toggle-button-do-color:darkorchid;"></cs-toggle-icon-button> 
-          <cs-toggle-icon-button tip="This is a tooltip"></cs-toggle-icon-button> 
+            style="--toggle-button-do-color:magenta;"></cs-toggle-icon-button>
+          <cs-toggle-icon-button 
+            do-icon="favorite-border" 
+            done-icon="favorite" 
+            style="--toggle-button-done-color:cyan; --toggle-button-do-color:darkorchid;"></cs-toggle-icon-button> 
+          <cs-toggle-icon-button tip="This is a tooltip"></cs-toggle-icon-button>
+          <cs-toggle-icon-button mode="done"></cs-toggle-icon-button>
 
         </template>
       </demo-snippet>

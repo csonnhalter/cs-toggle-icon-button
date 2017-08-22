@@ -27,7 +27,7 @@
 
     <test-fixture id="customcss">
       <template>
-        <cs-toggle-icon-button icons='{"done":"add", "do":"menu"}' 
+        <cs-toggle-icon-button do-icon="menu" done-icon="add"
           style="--toggle-button-do-color: rgb(255, 0, 0); --toggle-button-done-color: rgb(0, 0, 255); --toggle-button-tip-background: rgb(255, 0, 0); --toggle-button-tip-text-color: rgb(0, 0, 255); --toggle-button-tip-opacity:0.5; ">
         </cs-toggle-icon-button>
       </template>
@@ -56,29 +56,27 @@
 
         test('default icons in use',() => {
       
-          let value = tbutton.icons;
-
-          assert.equal(value.done, "expand-less");
-          assert.equal(value.do, "expand-more");
+          assert.equal(tbutton.doneIcon, "expand-less");
+          assert.equal(tbutton.doIcon, "expand-more");
         });
 
         test('start with do state',() => {
       
-          assert.equal(tbutton.ModeColclass, "do");
+          assert.equal(tbutton.mode, "do");
         });
 
         test('start with expand-more icon', () => {
       
-          assert.equal(tbutton.ModeIcon, "expand-more");
+          assert.equal(tbutton._ModeIcon, "expand-more");
         });
 
         test('pressing button toggles', () => {
     
           pressbutton(tbutton);
 
-          assert.equal(tbutton.ModeColclass, "done");
-          assert.equal(tbutton.ModeIcon, "expand-less");
-          assert.equal(tbutton.ModeDone, true);
+          assert.equal(tbutton.mode, "done");
+          assert.equal(tbutton._ModeIcon, "expand-less");
+          assert.equal(tbutton._ModeIsDone, true);
         });
 
         test('using internal defaults for tips css', () => {
@@ -110,25 +108,22 @@
 
         test('default icons in use', () => {
             
-          let value = tbutton.icons;
-
-          assert.equal(value.done, "expand-less");
-          assert.equal(value.do, "expand-more");
+          assert.equal(tbutton.doneIcon, "expand-less");
+          assert.equal(tbutton.doIcon, "expand-more");
         });
 
-        test('start with done state', () =>{
+        test('start with do state', () =>{
         
-          let value = tbutton.ModeColclass;
 
-          assert.equal(value, "done");
-          assert.equal(tbutton.ModeDone, true);
+          assert.equal(tbutton.mode, "do");
+          assert.equal(tbutton._ModeIsDone, false);
         });
 
         test('start with expand-less icon', () =>{
     
-          let value = tbutton.ModeIcon;
+          let value = tbutton._ModeIcon;
 
-          assert.equal(value, "expand-less");
+          assert.equal(value, "expand-more");
         });
     
         test('pressing button toggles not', () =>{
@@ -137,9 +132,9 @@
     
           pressbutton(tbutton);
     
-          assert.equal(tbutton.ModeColclass, pre.ModeColclass);
-          assert.equal(tbutton.ModeIcon, pre.ModeIcon);
-          assert.equal(tbutton.ModeDone, pre.ModeDone);
+          assert.equal(tbutton.mode, pre.mode);
+          assert.equal(tbutton._ModeIcon, pre._ModeIcon);
+          assert.equal(tbutton._ModeIsDone, pre._ModeIsDone);
         });
       });
 
@@ -159,10 +154,10 @@
     
         test('custom icons on paper-icon-button toggle', () =>{
             
-          let value = tbutton.icons;
-
-          assert.equal(value.done, "add");
-          assert.equal(value.do, "menu");
+          // let value = tbutton.icons;
+          //debugger;
+          assert.equal(tbutton.doneIcon, "add");
+          assert.equal(tbutton.doIcon, "menu");
 
           let pbutton = tbutton.shadowRoot.querySelector('paper-icon-button');
               
@@ -173,19 +168,17 @@
             
         test('start with do state', () =>{
             
-          let value = tbutton.ModeColclass;
-
-          assert.equal(value, "do");
-          assert.equal(tbutton.ModeDone, false);
+          assert.equal(tbutton.mode, "do");
+          assert.equal(tbutton._ModeIsDone, false);
         });
 
         test('pressing button toggles to custom icon', () =>{
           
           pressbutton(tbutton);
 
-          assert.equal(tbutton.ModeColclass, "done");
-          assert.equal(tbutton.ModeIcon, "add");
-          assert.equal(tbutton.ModeDone, true);
+          assert.equal(tbutton.mode, "done");
+          assert.equal(tbutton._ModeIcon, "add");
+          assert.equal(tbutton._ModeIsDone, true);
         });
 
         test('pressing button toggles not, if notoggle is set', () =>{
@@ -193,15 +186,15 @@
           tbutton.notoggle = true;
           pressbutton(tbutton);
 
-          assert.equal(tbutton.ModeColclass, "do");
-          assert.equal(tbutton.ModeIcon, "menu");
-          assert.equal(tbutton.ModeDone, false);
+          assert.equal(tbutton.mode, "do");
+          assert.equal(tbutton._ModeIcon, "menu");
+          assert.equal(tbutton._ModeIsDone, false);
 
           pressbutton(tbutton);
 
-          assert.equal(tbutton.ModeColclass, "do");
-          assert.equal(tbutton.ModeIcon, "menu");
-          assert.equal(tbutton.ModeDone, false);
+          assert.equal(tbutton.mode, "do");
+          assert.equal(tbutton._ModeIcon, "menu");
+          assert.equal(tbutton._ModeIsDone, false);
         });
         
         test('setting color with custom colors', () =>{
@@ -210,13 +203,13 @@
           
           let pbutton = tbutton.shadowRoot.querySelector('paper-icon-button');
 
-          assert.equal(tbutton.ModeColclass, "do");
+          assert.equal(tbutton.mode, "do");
           assert.equal(getCompStyle(pbutton, 'color'), doColor);
             
           
           pressbutton(tbutton);
         
-          assert.equal(tbutton.ModeColclass, "done");
+          assert.equal(tbutton.mode, "done");
           assert.equal(getCompStyle(pbutton, 'color'), doneColor);  
         });
 

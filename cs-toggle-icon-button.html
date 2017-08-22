@@ -34,7 +34,7 @@
 			}	
 		</style>
 
-		<paper-icon-button id="tog" class$="[[ModeColclass]]" icon="[[ModeIcon]]" noink on-tap="_toggle"></paper-icon-button>
+		<paper-icon-button id="tog" class$="[[mode]]" icon="[[_ModeIcon]]" noink on-tap="_toggle"></paper-icon-button>
 		<paper-tooltip for="tog" position="right">[[tip]]</paper-tooltip>
 
 	</template>
@@ -46,9 +46,13 @@
 
 			static get properties() {
 				return {
-					icons:{
-						type:Object,
-						value:{"done":"expand-less", "do":"expand-more"}
+					doIcon:{
+						type:String,
+						value: "expand-more"
+					},
+					doneIcon:{
+						type:String,
+						value:"expand-less"
 					},
 					notoggle:{
 						type:Boolean,
@@ -57,15 +61,21 @@
 					tip:{
 						type:String
 					},
-					ModeColclass:{
+					mode:{
 						type: String,
-						value: "do"
+						value:"do",
+						reflectToAttribute: true,
+						readOnly:true
 					},
-					ModeIcon:{
+					// _mode:{
+					// 	type: String,
+					// 	value: "do"
+					// },
+					_ModeIcon:{
 						type: String,
 						value:"expand-more"
 					},
-					ModeDone:{
+					_ModeIsDone:{
 						type: Boolean,
 						value:false
 					}
@@ -73,27 +83,36 @@
 			}
 
 			_toggle(){
+				// debugger;
 				if(!this.notoggle){
-					this.ModeDone=!this.ModeDone;
-					if(this.ModeDone){
-						this.ModeColclass="done";
-						this.ModeIcon=this.icons.done;
+					this._ModeIsDone=!this._ModeIsDone;
+					if(this._ModeIsDone){
+						this._setMode("done");
+						this._ModeIcon=this.doneIcon;
 					} else{
-						this.ModeColclass="do";
-						this.ModeIcon=this.icons.do;
+						this._setMode("do");
+						this._ModeIcon=this.doIcon;
 					};
 				};
 			}
 
 			ready(){
 				super.ready();
-				if(this.notoggle){
-					this.ModeDone=true;
-					this.ModeColclass="done";
-					this.ModeIcon=this.icons.done;
-				} else{
-					this.ModeIcon=this.icons.do;
-				};
+				if(this.mode == "done"){
+					this._ModeIcon=this.doneIcon;
+					this._ModeIsDone=true;
+				}else{
+					// if mode's not valid initially set to do
+					this._setMode("do");
+					this._ModeIcon = this.doIcon;					
+				}
+				// if(this.notoggle){
+				// 	this._ModeIsDone=true;
+				// 	this.mode="done";
+				// 	this.ModeIcon=this.icons.done;
+				// } else{
+				// 	this.ModeIcon=this.icons.do;
+				// };
 			}
 		}
 		// Register custom element definition using standard platform API
