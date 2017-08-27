@@ -65,12 +65,13 @@
 						type: String,
 						value:"do",
 						reflectToAttribute: true,
-						readOnly:true
+						readOnly:true,
+						notify:true
 					},
-					// _mode:{
-					// 	type: String,
-					// 	value: "do"
-					// },
+					startDone:{
+						type:Boolean,
+						value:false
+					},
 					_ModeIcon:{
 						type: String,
 						value:"expand-more"
@@ -96,23 +97,15 @@
 				};
 			}
 
-			ready(){
-				super.ready();
-				if(this.mode == "done"){
+			connectedCallback(){
+				super.connectedCallback();
+				if(this.startDone){
 					this._ModeIcon=this.doneIcon;
 					this._ModeIsDone=true;
+					this._setMode("done");
 				}else{
-					// if mode's not valid initially set to do
-					this._setMode("do");
 					this._ModeIcon = this.doIcon;					
 				}
-				// if(this.notoggle){
-				// 	this._ModeIsDone=true;
-				// 	this.mode="done";
-				// 	this.ModeIcon=this.icons.done;
-				// } else{
-				// 	this.ModeIcon=this.icons.do;
-				// };
 			}
 		}
 		// Register custom element definition using standard platform API

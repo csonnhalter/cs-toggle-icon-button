@@ -7,34 +7,82 @@
     <title>cs-toggle-icon-button demo</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../polymer/polymer.html">
+
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../paper-styles/color.html">
+    <link rel="import" href="../../paper-input/paper-input.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+
     <link rel="import" href="../cs-toggle-icon-button.html">
     <link rel="import" href="./demo-icons.html">
-
+    <link rel="import" href="./mode-demo.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
+        .demotip {
+          --demo-snippet-demo:{
+            background-color: var(--paper-yellow-200);
+          }
+        }
       </style>
     </custom-style>
   </head>
   <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic cs-toggle-icon-button demo</h3>
+    <!-- <div class="vertical-section-container centered">
+      <h3>Basic cs-toggle-icon-button</h3>
       <demo-snippet>
         <template>
           <cs-toggle-icon-button></cs-toggle-icon-button>
-          <cs-toggle-icon-button notoggle 
-            style="--toggle-button-do-color:magenta;"></cs-toggle-icon-button>
-          <cs-toggle-icon-button 
-            do-icon="favorite-border" 
-            done-icon="favorite" 
-            style="--toggle-button-done-color:cyan; --toggle-button-do-color:darkorchid;"></cs-toggle-icon-button> 
-          <cs-toggle-icon-button tip="This is a tooltip"></cs-toggle-icon-button>
-          <cs-toggle-icon-button mode="done"></cs-toggle-icon-button>
+        </template>
+        </demo-snippet>
 
+      <h3>Styled non toggling cs-toggle-icon-button </h3>
+      <demo-snippet>
+        <template>
+          <custom-style>
+              <style is="custom-style">
+                .notoggle { 
+                  --toggle-button-do-color:var(--paper-cyan-500);
+                }
+              </style>
+            </custom-style>    
+            <cs-toggle-icon-button notoggle class="notoggle" ></cs-toggle-icon-button>
         </template>
       </demo-snippet>
+      <h3>Custom icons cs-toggle-icon-button </h3>
+      <demo-snippet>
+        <template>
+          <custom-style>
+            <style is="custom-style">
+              .styled {
+              --toggle-button-do-color:var(--paper-blue-500);
+              --toggle-button-done-color:var(--paper-pink-500); 
+               }
+            </style>
+          </custom-style>
+          <cs-toggle-icon-button  do-icon="favorite-border" done-icon="favorite" class="styled" ></cs-toggle-icon-button>
+        </template>
+      </demo-snippet>
+      <h3>Cs-toggle-icon-button with styled tip </h3>
+      <demo-snippet class="demotip">
+        <template>
+          <custom-style>
+            <style is="custom-style">
+              .tip {
+				        --toggle-button-tip-background:var(--paper-grey-500);
+				        --toggle-button-tip-opacity:0.5;
+				        --toggle-button-tip-text-color: white;              					
+              }
+            </style>
+          </custom-style>
+          <cs-toggle-icon-button tip="This is a tip!" class="tip"></cs-toggle-icon-button>
+        </template>
+      </demo-snippet>
+ -->
+      <h3>Cs-toggle-icon-button starting with done state </h3>
+      <mode-demo></mode-demo>  
     </div>
   </body>
 </html>
