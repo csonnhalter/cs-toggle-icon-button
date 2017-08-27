@@ -6,8 +6,6 @@
 <link rel="import" href="/bower_components/neon-animation/web-animations.html">
 <link rel="import" href="/bower_components/paper-tooltip/paper-tooltip.html">
 
-
-
 <dom-module id="cs-toggle-icon-button">
 	<template>
 		<style>
@@ -40,27 +38,57 @@
 	</template>
 	
 	<script>
+/**
+`<cs-toggle-icon-button>` is a small wrapper for `<paper-icon-button>` and `<paper-tooltip>`. 
+It toggles on tap the icon displayed on the button. Optionally you can use the attribute `tip` to add a 
+tooltip to the button. `<cs-toggle-icon-button>`  has attributes to set your own icons 
+and css variables to style button and tooltip.
+
+The button switches on tap between two states, *do* and *done*. These govern the look of the button.
+### Examples
+are in the Demo.
+### Styling
+`<cs-toggle-icon-button>` provides custom css properties for the styling of button and tooltip.
+
+Custom property                  | Description                            | Default
+---------------------------------|----------------------------------------|----------
+`--toggle-button-do-color`       | do state color of the button           | black
+`--toggle-button-done-color`     | done state color of the button         | black
+`--toggle-button-tip-background` | tooltip's background-color             | `--paper-tooltip-background` or white
+`--toggle-button-tip-opacity`    | tooltip's opacitiy of the              | `--paper-tooltip-opacity` or 0.9
+`--toggle-button-tip-text-color` | tooltip's text color of the            | `--paper-tooltip-text-color` or black
+
+@customElement 
+@polymer
+@demo demo/index.html
+*
+*/
 		class  CsToggleIconButton extends Polymer.GestureEventListeners(Polymer.Element) {
 
 			static get is() { return 'cs-toggle-icon-button'; }
 
 			static get properties() {
 				return {
+					/* Icon shown in *do* state */ 
 					doIcon:{
 						type:String,
 						value: "expand-more"
 					},
+					/* Icon shown in *done* state */
 					doneIcon:{
 						type:String,
 						value:"expand-less"
 					},
+					/* If `notoggle` is present, button stays in it's initial state. */
 					notoggle:{
 						type:Boolean,
 						value:false
 					},
+          // Text in the tooltip 
 					tip:{
 						type:String
 					},
+					// Attribute that contains the current state of the button, possible values are *do* and *done*
 					mode:{
 						type: String,
 						value:"do",
@@ -68,23 +96,27 @@
 						readOnly:true,
 						notify:true
 					},
+					// If present, inital state of the button is set to *done* instead of the default *do*
 					startDone:{
 						type:Boolean,
 						value:false
 					},
+					//Current icon of the button
 					_ModeIcon:{
 						type: String,
 						value:"expand-more"
 					},
+					//If true, mode is *done* else *do* 
 					_ModeIsDone:{
 						type: Boolean,
 						value:false
 					}
 				}
 			}
-
+/* toggles the state of the button  
+  @return {void}
+*/	
 			_toggle(){
-				// debugger;
 				if(!this.notoggle){
 					this._ModeIsDone=!this._ModeIsDone;
 					if(this._ModeIsDone){
@@ -97,6 +129,7 @@
 				};
 			}
 
+// Adjusts state, if `start-done` is set and initializes icon 
 			connectedCallback(){
 				super.connectedCallback();
 				if(this.startDone){
