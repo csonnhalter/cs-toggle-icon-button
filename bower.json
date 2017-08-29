@@ -1,6 +1,6 @@
 {
   "name": "cs-toggle-icon-button",
-  "description": "paper-icon-button that switches it icon and colors on tap.",
+  "description": "paper-icon-button that switches its icon and colors on tap.",
   "main": "cs-toggle-icon-button.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
