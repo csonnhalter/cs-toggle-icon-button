@@ -41,6 +41,12 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="modedone">
+      <template>
+        <cs-toggle-icon-button start-done></cs-toggle-icon-button>
+      </template>
+    </test-fixture>
+
     <script>
       suite('toggle element, no attributes',() => {
         let tbutton;
@@ -246,6 +252,36 @@
           assert.equal(getCompStyle(tip, '--paper-tooltip-background'), tipBgColor);
           assert.equal(getCompStyle(tip, '--paper-tooltip-text-color'), tipColor);
         });
+      });
+
+      suite('set start-done', () => {
+        
+        let tbutton;
+        let pbutton;
+
+        setup(() => {
+          tbutton = fixture('modedone');
+          pbutton = tbutton.shadowRoot.querySelector('paper-icon-button');
+        });
+
+          test('start with done state', () => {
+            assert.equal(tbutton.mode, "done");
+          });
+
+          test('start with done icon', () => {
+            assert.equal(tbutton._ModeIcon, tbutton.doneIcon);
+            assert.equal(tbutton._ModeIcon, pbutton.icon);
+          });
+
+          test('pressing button toggles to do', () => {
+
+            pressbutton(tbutton);
+
+            assert.equal(tbutton.mode, "do");
+            assert.equal(tbutton._ModeIcon, tbutton.doIcon);
+            assert.equal(tbutton._ModeIcon, pbutton.icon);
+            assert.equal(tbutton._ModeIsDone, false);
+          });
       });
 
       function pressbutton(tbutton) {
