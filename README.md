@@ -1,7 +1,7 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/csonnhalter/cs-scroll)
 # \<cs-toggle-icon-button\>
 
-The button changes on tap between two icons and has an optional tooltip. A wrapper to `<paper-icon-button>` and `<paper-tooltip>`.
+The button changes on tap between two icons and has an optional tooltip. A wrapper for `<paper-icon-button>` and `<paper-tooltip>`.
 <!---
 ```
 <custom-element-demo>
