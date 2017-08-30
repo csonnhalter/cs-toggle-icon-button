@@ -8,7 +8,7 @@ A button that changes between two icons on tap with an optional tooltip. A wrapp
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="cs-toggle-icon-button.html">
-    <link rel="import" href="../iron-icons/iron-icons.html">
+    <link rel="import" href="../iron-icons/social-icons.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -17,6 +17,6 @@ A button that changes between two icons on tap with an optional tooltip. A wrapp
 ```html
 <cs-toggle-icon-button tip="Press me and I will change!" >
 </cs-toggle-icon-button>
-<cs-toggle-icon-button do-icon="icons:create" done-icon="icons:done">
+<cs-toggle-icon-button do-icon="social:sentiment-dissatisfied" done-icon="social:sentiment-satisfied">
 </cs-toggle-icon-button>
 ```
