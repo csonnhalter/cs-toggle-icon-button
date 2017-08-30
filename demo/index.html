@@ -48,7 +48,7 @@
             <cs-toggle-icon-button notoggle class="notoggle" ></cs-toggle-icon-button>
         </template>
       </demo-snippet>
-      <h3>Custom icons cs-toggle-icon-button </h3>
+      <h3>Custom icons and different starting states for cs-toggle-icon-button </h3>
       <demo-snippet>
         <template>
           <custom-style>
@@ -59,22 +59,23 @@
                }
             </style>
           </custom-style>
-          <cs-toggle-icon-button  do-icon="favorite-border" done-icon="favorite" class="styled" ></cs-toggle-icon-button>
+          <cs-toggle-icon-button do-icon="favorite-border" done-icon="favorite" class="styled"></cs-toggle-icon-button>
+          <cs-toggle-icon-button start-done do-icon="favorite-border" done-icon="favorite" class="styled"></cs-toggle-icon-button>
         </template>
       </demo-snippet>
-      <h3>Cs-toggle-icon-button with styled tip </h3>
+      <h3>Cs-toggle-icon-button with a styled tip </h3>
       <demo-snippet class="demotip">
         <template>
           <custom-style>
             <style is="custom-style">
               .tip {
 				        --toggle-button-tip-background:var(--paper-grey-500);
-				        --toggle-button-tip-opacity:0.5;
+				        --toggle-button-tip-opacity:0.3;
 				        --toggle-button-tip-text-color: white;              					
               }
             </style>
           </custom-style>
-          <cs-toggle-icon-button tip="This is a tip!" class="tip"></cs-toggle-icon-button>
+          <cs-toggle-icon-button tip="This is a ghost tip!" class="tip"></cs-toggle-icon-button>
         </template>
       </demo-snippet>
     </div>
