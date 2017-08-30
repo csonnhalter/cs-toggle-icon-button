@@ -15,6 +15,8 @@ A button that changes between two icons on tap with an optional tooltip. A wrapp
 ```
 -->
 ```html
-<cs-toggle-icon-button tip="Press me and I will change!" ></cs-toggle-icon-button>
-<cs-toggle-icon-button do-icon="icons:create" done-icon="icons:done"></cs-toggle-icon-button>
+<cs-toggle-icon-button tip="Press me and I will change!" >
+</cs-toggle-icon-button>
+<cs-toggle-icon-button do-icon="icons:create" done-icon="icons:done">
+</cs-toggle-icon-button>
 ```
